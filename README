@@ -1,76 +1,315 @@
-OpenVPN -- A Secure tunneling daemon
+# OpenVPN Cryptographic Security Analysis for IPsec & IPv6
 
-Copyright (C) 2002-2026 OpenVPN Inc. This program is free software;
-you can redistribute it and/or modify
-it under the terms of the GNU General Public License version 2
-as published by the Free Software Foundation.
+## 📌 Project Overview
 
-*************************************************************************
+This project investigates security vulnerabilities and cryptographic implementation aspects of OpenVPN in the context of secure tunneling, IPsec concepts, and IPv6 deployment.
 
-To get the latest release of OpenVPN, go to:
+The project focuses on analyzing cryptographic components, testing security-related functionality, identifying potentially vulnerable configurations, and validating the reliability of cryptographic operations used in secure VPN communication.
 
-	https://openvpn.net/community-downloads/
+The work was carried out as an academic security research project using the OpenVPN open-source codebase as the primary environment for analysis and testing.
 
-To Build and Install,
+> **Note:** OpenVPN is an existing open-source project. This repository contains the OpenVPN source code used as the testing and research environment. My contribution focuses on security analysis, cryptographic testing, vulnerability investigation, test execution, and documentation rather than development of the complete OpenVPN software.
 
-	tar -zxf openvpn-<version>.tar.gz
-	cd openvpn-<version>
-	./configure
-	make
-	make install
+---
 
-or see the file INSTALL for more info.
+## 🎯 Project Objective
 
-For information on how to build OpenVPN on/for Windows with MinGW
-or MSVC see README.cmake.md.
+The main objectives of this project are:
 
-*************************************************************************
+- Study the security architecture of OpenVPN.
+- Investigate cryptographic libraries and algorithms used for secure communication.
+- Analyze security considerations related to encrypted VPN tunnels.
+- Examine IPsec and IPv6 security concepts.
+- Identify potentially insecure configurations and implementation risks.
+- Perform static and dynamic security analysis.
+- Execute cryptographic and functional tests.
+- Investigate known vulnerabilities using CVE information.
+- Validate the security and reliability of the analyzed environment.
 
-For detailed information on OpenVPN, including examples, see the man page
-  http://openvpn.net/man.html
+---
 
-For a sample VPN configuration, see
-  http://openvpn.net/howto.html
+## 🔐 Security Areas Covered
 
-To report an issue, see
-  https://github.com/OpenVPN/openvpn/issues/new
+The project focuses on the following security areas:
 
-For a description of OpenVPN's underlying protocol,
-  see the file ssl.h included in the source distribution.
+### Cryptographic Analysis
 
-*************************************************************************
+Analysis of cryptographic mechanisms used for:
 
-Other Files & Directories:
+- Encryption
+- Authentication
+- Key derivation
+- Secure tunnel communication
+- TLS-based security
 
-* configure.ac -- script to rebuild our configure
-  script and makefile.
+Cryptographic operations and components investigated include:
 
-* sample/sample-scripts/verify-cn
+- AES-GCM
+- HMAC
+- HKDF
+- TLS PRF
+- Cryptographic key handling
+- Authentication mechanisms
 
-  A sample perl script which can be used with OpenVPN's
-  --tls-verify option to provide a customized authentication
-  test on embedded X509 certificate fields.
+### Vulnerability Analysis
 
-* sample/sample-keys/
+The project investigates possible security risks associated with:
 
-  Sample RSA keys and certificates.  DON'T USE THESE FILES
-  FOR ANYTHING OTHER THAN TESTING BECAUSE THEY ARE TOTALLY INSECURE.
+- Cryptographic library implementations
+- Weak or insecure configurations
+- Incorrect cryptographic usage
+- Known vulnerabilities
+- Dependency-related security issues
+- Secure VPN deployment
 
-* sample/sample-config-files/
+Known vulnerability information can be compared with publicly available CVE records to identify security issues affecting relevant components.
 
-  A collection of OpenVPN config files and scripts from
-  the HOWTO at http://openvpn.net/howto.html
+### IPsec & IPv6 Security Study
 
-*************************************************************************
+The project also studies security considerations associated with:
 
-Note that easy-rsa and tap-windows are now maintained in their own subprojects.
-Their source code is available here:
+- IPsec architecture
+- Secure network tunneling
+- Authentication and encryption
+- IPv6 deployment
+- Secure communication over IPv6 networks
 
-  https://github.com/OpenVPN/easy-rsa
-  https://github.com/OpenVPN/tap-windows6
+---
 
-Community-provided Windows installers (MSI) and Debian packages are built from
+## 🧪 Testing & Validation
 
-  https://github.com/OpenVPN/openvpn-build
+The OpenVPN environment was built and tested inside an Ubuntu virtual machine.
 
-See the INSTALL file for usage information.
+Testing included cryptographic unit tests and functional OpenVPN tests.
+
+### Cryptographic Test Driver
+
+A cryptographic test driver was used to validate operations including:
+
+- AES-GCM encryption/decryption
+- HMAC operations
+- HKDF key derivation
+- TLS PRF
+- Epoch/key-related cryptographic operations
+
+A total of **21 cryptographic tests** were executed during project testing.
+
+### OpenVPN Test Suite
+
+Testing also included OpenVPN test components such as:
+
+- `t_lpback`
+- `t_cltsrv`
+- `t_net`
+
+During testing, the loopback test successfully executed **67 tests**.
+
+Some networking tests required elevated privileges because they interact with network interfaces and system-level networking functionality.
+
+---
+
+## 🛠️ Technologies & Tools
+
+| Technology / Tool | Purpose |
+|---|---|
+| OpenVPN | VPN source code and research environment |
+| OpenSSL | Cryptographic operations and library analysis |
+| Ubuntu Linux | Development and testing environment |
+| Git | Version control |
+| GitHub | Source-code hosting and project tracking |
+| C / CMake | Building and analyzing project components |
+| cmocka | Unit testing |
+| Static Analysis | Source-code and configuration inspection |
+| Dynamic Testing | Runtime behavior and functional validation |
+| CVE Analysis | Investigation of known security vulnerabilities |
+| IPv6 | Next-generation network protocol security study |
+| IPsec | Secure networking and tunneling concepts |
+
+---
+
+## 🏗️ Project Workflow
+
+The project follows the general security-analysis workflow:
+
+```text
+OpenVPN Source Code
+        ↓
+Environment Setup
+        ↓
+Build & Dependency Configuration
+        ↓
+Cryptographic Component Analysis
+        ↓
+Static Security Analysis
+        ↓
+Dynamic / Functional Testing
+        ↓
+Cryptographic Test Execution
+        ↓
+CVE & Vulnerability Investigation
+        ↓
+Security Validation
+        ↓
+Results & Documentation
+```
+
+---
+
+## 👥 System / Analysis Actors
+
+The project design considers the following logical actors:
+
+### Researcher
+Performs security analysis, executes tests, reviews configurations, and investigates vulnerabilities.
+
+### Packet Analyzer
+Supports inspection of network communication and packet-level behavior.
+
+### Fuzz Engine
+Represents automated malformed or unexpected input testing used to identify potential implementation weaknesses.
+
+### CVE Database
+Provides information about publicly disclosed vulnerabilities associated with software components and dependencies.
+
+---
+
+## 👩‍💻 My Contribution
+
+My work on this project included:
+
+- Setting up the OpenVPN source environment on Ubuntu.
+- Configuring the required development and testing dependencies.
+- Building and troubleshooting the OpenVPN project.
+- Studying OpenVPN's cryptographic architecture.
+- Investigating encryption and authentication mechanisms.
+- Analyzing cryptographic operations including AES-GCM, HMAC, HKDF, and TLS PRF.
+- Running cryptographic test cases and examining their results.
+- Executing OpenVPN functional and networking tests.
+- Investigating security vulnerabilities and CVE information.
+- Studying security considerations related to IPsec and IPv6 deployment.
+- Analyzing test failures and environment-related issues.
+- Using Git and GitHub for version control and project management.
+- Documenting the implementation, testing process, observations, and results.
+
+This work provided practical experience in **cybersecurity research, cryptographic testing, Linux development environments, networking, debugging, and open-source software analysis**.
+
+---
+
+## 📊 Testing Results
+
+Testing demonstrated successful execution of major cryptographic and functional components within the configured environment.
+
+Key observations included:
+
+- Successful execution of cryptographic test cases.
+- Validation of AES-GCM and authentication-related operations.
+- Successful HMAC and HKDF testing.
+- Successful execution of TLS PRF-related tests.
+- Successful execution of OpenVPN loopback tests.
+- Functional networking tests executed with required system privileges.
+- Identification and analysis of environment and configuration-related test issues.
+
+These results helped validate the configured testing environment and provided practical insight into the security mechanisms used by OpenVPN.
+
+---
+
+## 🔍 Skills Demonstrated
+
+This project demonstrates practical experience with:
+
+- Cybersecurity fundamentals
+- Network security
+- Cryptography
+- VPN technologies
+- OpenVPN
+- IPsec concepts
+- IPv6 networking
+- Linux
+- OpenSSL
+- Static analysis
+- Dynamic testing
+- Vulnerability analysis
+- CVE research
+- Software testing
+- Debugging
+- Git & GitHub
+- Open-source software analysis
+
+---
+
+## 🚀 How to Build
+
+Clone the repository:
+
+```bash
+git clone https://github.com/anshika465/openvpn-ipsec-security-analysis.git
+cd openvpn-ipsec-security-analysis
+```
+
+Build requirements depend on the Linux distribution and OpenVPN version used in the repository.
+
+A typical source build follows a process similar to:
+
+```bash
+autoreconf -vi
+./configure
+make
+```
+
+Tests can then be executed using the project's supported test targets, for example:
+
+```bash
+make check
+```
+
+> Some networking tests may require elevated privileges and appropriate network-interface support.
+
+---
+
+## 📚 Learning Outcomes
+
+Through this project, I gained hands-on experience in:
+
+- Understanding the architecture of a large open-source project.
+- Working with Linux command-line development tools.
+- Building software from source.
+- Understanding cryptographic algorithms used in secure networking.
+- Running and interpreting automated test suites.
+- Investigating software vulnerabilities.
+- Debugging dependency and configuration problems.
+- Understanding VPN and secure tunneling concepts.
+- Studying IPv6 and IPsec security.
+- Using Git and GitHub for collaborative software development.
+
+---
+
+## 👥 Project Team
+
+**Anshika Chouhan**  
+B.Tech — Computer Science & Engineering (AI & ML)
+
+**Chirag Bhawsar**
+
+### Project Guide
+
+**Prof. Unnati Mishra**
+
+---
+
+## ⚠️ Disclaimer
+
+This project was developed for **academic, educational, and defensive security research purposes**.
+
+The OpenVPN source code belongs to its respective open-source project and contributors. This repository uses the source code as a research and testing environment. The security analysis, testing, observations, and academic documentation represent the project team's work.
+
+---
+
+## 🔗 Repository
+
+GitHub: `https://github.com/anshika465/openvpn-ipsec-security-analysis`
+
+---
+
+## ⭐ Project Summary
+
+**OpenVPN Cryptographic Security Analysis for IPsec & IPv6** is an academic cybersecurity project focused on studying cryptographic implementations, VPN security, vulnerability analysis, automated testing, and secure IPv6/IPsec networking concepts using the OpenVPN open-source environment.
